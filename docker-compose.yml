@@ -1,0 +1,31 @@
+version: '3.3'
+
+services:
+  db:
+    image: mysql:latest
+    environment:
+      MYSQL_USER: 'user'
+      MYSQL_PASSWORD: 'root'
+      MYSQL_ROOT_PASSWORD: 'root'
+      MYSQL_DATABASE: 'simpleapp'
+      MYSQL_ROOT_HOST: '0.0.0.0'
+    expose:
+      - '3306'
+    restart: always
+    ports:
+      - "3306:3306"
+
+  customerservice:
+    image: property-service
+    container_name: property-service-app
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    depends_on:
+      - db
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://db:3306/simpleapp
+      SPRING_DATASOURCE_USERNAME: user
+      SPRING_DATASOURCE_PASSWORD: root

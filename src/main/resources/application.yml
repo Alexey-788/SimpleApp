@@ -1,8 +1,8 @@
 spring:
   datasource:
-    url: jdbc:mysql://localhost:3306/simpleapp
-    username: root
-    password: passworD1+
+    url: jdbc:mysql://db:3306/simpleapp
+    username: user
+    password: root
     dialect: org.hibernate.dialect.MySQL8Dialect
   jpa:
     hibernate:
