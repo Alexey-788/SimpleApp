@@ -41,9 +41,8 @@ public class CounterService {
 
     @Transactional
     public int incrementAndGetCount(long counterId, int incrementCount) {
+        counterRepository.incrementCount(counterId, incrementCount);
         CounterEntity counterEntity = counterRepository.getById(counterId);
-        int incrementedCount = counterEntity.getCount() + incrementCount;
-        counterEntity.setCount(incrementedCount);
-        return incrementedCount;
+        return counterEntity.getCount();
     }
 }
