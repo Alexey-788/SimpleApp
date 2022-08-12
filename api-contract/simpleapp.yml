@@ -1,102 +1,99 @@
 swagger: '2.0'
 info:
-  version: '1.0.0'
-  title: SimpleApp
-  description: A simple counter API
+    version: '1.0.0'
+    title: SimpleApp
+    description: A simple counter API
 
 basePath: /v1
 schemes:
-  - http
-  - https
+    - http
+    - https
 
 produces:
-  - application/json
+    - application/json
 
 definitions:
-  counter:
-    $ref: ./definitions/models/counterDto.yml
-  counterIncrementRequest:
-    $ref: ./definitions/models/counterIncrementRequestDto.yml
-  errorModel:
-    $ref: ./definitions/errors/errorModel.yml
+    counterDto:
+        $ref: ./definitions/models/counterDto.yml
+    counterIncrementRequestDto:
+        $ref: ./definitions/models/counterIncrementRequestDto.yml
+    errorModel:
+        $ref: ./definitions/errors/errorModel.yml
 
 paths:
-  /counter/createCounter:
-    post:
-      summary: Creates a new counter and returns generated id
-      operationId: createCounter
-      produces:
-        - application/json
-      parameters:
-        - name: count
-          in: body
-          description: initial count value
-          required: false
-          schema:
-            type: integer
-            minimum: 0
-            default: 0
-      responses:
-        '200':
-          description: id response
-          schema:
-            type: string
-            description: id of new counter
-        '400':
-          description: incorrect cout parameter
-          schema:
-            $ref: '#/definitions/errorModel'
+    /counter/createCounter:
+        post:
+            summary: Creates a new counter and returns its id
+            operationId: createCounter
+            produces:
+                - text/plain
+            parameters:
+                - name: counter
+                  in: body
+                  description: object with id and count value
+                  schema:
+                      $ref: '#/definitions/counterDto'
+            responses:
+                '200':
+                    description: id response
+                    schema:
+                        type: string
+                        description: id of new counter
+                '400':
+                    description: incorrect count parameter
+                    schema:
+                        $ref: '#/definitions/errorModel'
 
-  /counter/getCount:
-    get:
-      summary: Returns value of counter for scecified id
-      operationId: getCount
-      produces:
-        - application/json
-      parameters:
-        - name: counterId
-          in: query
-          description: counter id, by which a count will look for
-          required: true
-          type: string
-          maxLength: 10
-      responses:
-        '200':
-          description: count response
-          schema:
-            type: integer
-            format: int32
-            description: value of counter
-        '404':
-          description: counter with scepcified id not found
-          schema:
-            $ref: '#/definitions/errorModel'
+    /counter/getCount:
+        get:
+            summary: Returns value of counter for scecified id
+            operationId: getCount
+            produces:
+                - application/json
+            parameters:
+                - name: counterId
+                  in: query
+                  description: counter id, by which a count will look for
+                  required: true
+                  type: string
+                  maxLength: 10
+            responses:
+                '200':
+                    description: count response
+                    schema:
+                        type: integer
+                        format: int32
+                        description: value of counter
+                '404':
+                    description: counter with scepcified id not found
+                    schema:
+                        $ref: '#/definitions/errorModel'
 
-  /counter/incrementCount:
-    post:
-      summary: Increments a counter to the indicated value
-      operationId: incrementCount
-      produces:
-        - application/json
-      parameters:
-        - name: counterRequest
-          in: body
-          description: object with id and increment count fields
-          required: true
-          schema:
-            $ref: '#/definitions/counterIncrementRequest'
-      responses:
-        '200':
-          description: incremented count response
-          schema:
-            type: integer
-            format: int32
-            description: incremented value of counter
-        '404':
-          description: counter with specified id not found
-          schema:
-            $ref: '#/definitions/errorModel'
-        '400':
-          description: incorrect parameters
-          schema:
-            $ref: '#/definitions/errorModel'
+    /counter/incrementCount:
+        post:
+            summary: Increments a counter to the indicated value
+            operationId: incrementCount
+            produces:
+                - application/json
+            parameters:
+                - name: counterRequest
+                  in: body
+                  description: object with id and increment count fields
+                  required: true
+                  schema:
+                      $ref: '#/definitions/counterIncrementRequestDto'
+            responses:
+                '200':
+                    description: incremented count response
+                    schema:
+                        type: integer
+                        format: int32
+                        description: incremented value of counter
+                '404':
+                    description: counter with specified id not found
+                    schema:
+                        $ref: '#/definitions/errorModel'
+                '400':
+                    description: incorrect parameters
+                    schema:
+                        $ref: '#/definitions/errorModel'

@@ -1,0 +1,9 @@
+databaseChangeLog:
+    - changeSet:
+          id: change-counter-id-type
+          author: AlexeySheblykin
+          changes:
+              - modifyDataType:
+                    tableName: counter
+                    columnName: id
+                    newDataType: varchar(10)

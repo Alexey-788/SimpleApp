@@ -8,10 +8,10 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 @Repository
-public interface CounterRepository extends JpaRepository<CounterEntity, Long> {
+public interface CounterRepository extends JpaRepository<CounterEntity, String> {
 
     @Transactional
     @Modifying
     @Query("UPDATE counter c SET c.count = c.count + :incrementCount WHERE c.id = :counterId")
-    void incrementCount(long counterId, int incrementCount);
+    void incrementCount(String counterId, int incrementCount);
 }
