@@ -1,31 +1,36 @@
 package com.alexey.sheblykin.entities;
 
-import javax.persistence.*;
+import io.swagger.model.CounterDto;
+
+import javax.persistence.Entity;
+import javax.persistence.Id;
 import java.util.Objects;
 
 @Entity(name = "counter")
 public class CounterEntity {
 
-
-
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "counter_id_gen")
-    @SequenceGenerator(name = "counter_id_gen", sequenceName = "counter_id_seq")
-    private long id;
+    private String id;
     private int count;
 
     public CounterEntity() {
     }
 
-    public CounterEntity(int count) {
+    public CounterEntity(String id, int count) {
+        this.id = id;
         this.count = count;
     }
 
-    public long getId() {
+    public CounterEntity(CounterDto counterDto) {
+        this.id = counterDto.getId();
+        this.count = counterDto.getCount();
+    }
+
+    public String getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -42,7 +47,7 @@ public class CounterEntity {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         CounterEntity that = (CounterEntity) o;
-        return getId() == that.getId() && getCount() == that.getCount();
+        return getCount() == that.getCount() && Objects.equals(getId(), that.getId());
     }
 
     @Override

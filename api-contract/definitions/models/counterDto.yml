@@ -3,8 +3,9 @@ required:
   - counterId
   - value
 properties:
-  counterId:
+  id:
     type: string
-  value:
+    maxLength: 10
+  count:
     type: integer
     format: int32

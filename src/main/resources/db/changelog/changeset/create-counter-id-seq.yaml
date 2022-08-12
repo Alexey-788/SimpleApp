@@ -1,0 +1,17 @@
+databaseChangeLog:
+    - changeSet:
+          id: create-counter-id-seq
+          author: AlexeySheblykin
+          changes:
+              - createTable:
+                    tableName: counter_id_seq
+                    columns:
+                        - column:
+                              name: next_val
+                              type: bigint
+              - insert:
+                    tableName: counter_id_seq
+                    columns:
+                        - column:
+                              name: next_val
+                              valueNumeric: 1
