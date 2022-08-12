@@ -1,0 +1,19 @@
+databaseChangeLog:
+  - changeSet:
+      id: create-counter
+      author: AlexeySheblykin
+      changes:
+        - createTable:
+            tableName: counter
+            columns:
+              - column:
+                    name: id
+                    type: bigint
+                    constraints:
+                      primaryKey: true
+                      nullable: false
+              - column:
+                    name: count
+                    type: int
+                    constraints:
+                      nullable: false

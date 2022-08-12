@@ -4,7 +4,12 @@ spring:
     username: user
     password: root
     dialect: org.hibernate.dialect.MySQL8Dialect
+
   jpa:
     hibernate:
-      ddl-auto: create
+      ddl-auto: validate
     database-platform: org.hibernate.dialect.MySQL8Dialect
+    show-sql: true
+
+  liquibase:
+    change-log: classpath:db/changelog/db.changelog.master.yml

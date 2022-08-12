@@ -1,0 +1,4 @@
+databaseChangeLog:
+    - include:
+          file: db/changelog/changeset/create-counter-table.yaml
+          file: db/changelog/changeset/create-counter-id-seq.yaml
