@@ -2,7 +2,7 @@
 
 ## About
 
-This project was created on technical assignment. Its goal is to provide the API using the Swagger tool.
+This project was created on technical assignment. Its goal is to provide the API using the Swagger-codegen tool.
 
 ## Technologies
 
@@ -10,6 +10,7 @@ Used technologies:
 * Web: Spring Web
 * Database: MySQL
 * ORM: Hibernate(Spring Data)
+* Migration: Liquibase
 * Documentation: Swagger
 
 ## Launch
